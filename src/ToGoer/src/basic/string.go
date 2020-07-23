@@ -138,7 +138,4 @@ func OperateString() {
 	array[0] = 72
 	str1 = string(array)
 	fmt.Println("str1 is ", str1)
-
-	fmt.Println("------Over-----\n")
-
 }
