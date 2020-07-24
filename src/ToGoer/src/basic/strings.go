@@ -30,3 +30,21 @@ func EqualFold(s, t string) bool {
 func HasPrefix(s, prefix string) bool {
 	return strings.HasPrefix(s, prefix)
 }
+
+func Add(a, b int) int {
+	return a + b
+}
+
+// HasSuffix tests whether the string s ends with suffix
+func HasSuffix(s, suffix string) bool {
+	return strings.HasSuffix(s, suffix)
+}
+
+// Index returns the index of the first instance of substr in s, or -1 if substr is not present in s.
+func Index(s, substr string) int {
+	return strings.Index(s, substr)
+}
+
+
+
+
