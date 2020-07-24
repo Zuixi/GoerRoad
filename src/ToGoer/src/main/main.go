@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"ToGoer/src/basic" 
-	"ToGoer/src/leetcode"
+	"GoerRoad/src/ToGoer/src/basic" 
+	"GoerRoad/src/ToGoer/src/leetcode"
 )
 
 func main() {
