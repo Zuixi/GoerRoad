@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+	leetcode.DetectCapitalUse("mL");
 	basic.TestAndNot()
 	fmt.Println("leetcode")
 	var array = []int {1,0,0,0,1,1}
