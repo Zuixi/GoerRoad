@@ -16,7 +16,7 @@ func FindMaxConsecutiveOnes(nums []int) int {
     for {
         // 不含1的数组
         if left == len(nums) - 1 {
-            return 0
+            break
         }
 
         if right >= len(nums) - 1{

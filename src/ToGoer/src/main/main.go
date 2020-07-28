@@ -7,8 +7,9 @@ import (
 )
 
 func main() {
+	basic.TestAndNot()
 	fmt.Println("leetcode")
-	var array = []int {1,0,1,1,0,1}
+	var array = []int {1,0,0,0,1,1}
 	leetcode.FindMaxConsecutiveOnes(array)
 	fmt.Println(leetcode.BinaryGap(22))
 	fmt.Println(leetcode.GetStringOfInt(22, 2))
