@@ -1,8 +1,8 @@
 package basic
 
 import (
-	"rune"
 	"strings"
+	"fmt"
 )
 
 // bitwise AND &
@@ -70,3 +70,52 @@ func OrString() string {
 
 // XOR ^ 
 // XOR(a, b) = 1; only if a != b else = 0
+// XOR 可以把二进制位的一个值变成另外一个值，例如 0xCEFF ^ 0xFF00
+// XOR 还可以用来判断两个数字的符号是否一样，若 a ^ b >= 0 或者a ^ b < 0为true的时候，a和b具有相同的符号
+
+func IsSameSignal(a, b int) bool {
+	if a ^ b >= 0 {
+		return true
+	} else {
+		return false
+	}
+}
+
+// ^ 也可以作为取反运算符
+func ReverseInt(a int) int {
+	return ^a
+}
+
+// &^ 操作符 与非 
+// Given operands a, b
+// AND_NOT(a, b) == AND(a, NOT(b))
+// AND_NOT(a, 1) = 0; clears a
+// AND_NOT(a, 0) = a
+// 如果第二个操作数是1，那么可以清除第一个操作数的位
+
+func TestAndNot() {
+	var a byte = 0xAB;
+	fmt.Print("%08b\n", a)
+
+	a &^= 0x0F
+	fmt.Print("%08b\n", a)
+
+	// 将1010 1011 变成1010 0000
+	var b byte = 0xAB
+	b &^= 0x0F
+	fmt.Print("%08b\n", b)
+
+}
+
+// 移位运算符 << and >> 
+// a << n --> shifts all bits in a to the left n times
+// a >> n --> shifts all bits in a to the right n times
+
+func TestRL() {
+	// 将0x00000011左移三次
+	var a int8 = 3
+	fmt.Println("%08b\n", a)
+	fmt.Println("%08x\n", a << 1)
+	fmt.Println("%08x\n", a << 2)
+	fmt.Println("%08x\n", a << 3)
+}
