@@ -10,9 +10,26 @@ func DetectCapitalUse(word string) bool {
 
 	length := len(word)
 
-	// 特殊case
+	// 特殊case mL mmm
 	if (word[0] <= 'z' && word[0] >= 'a') && length != 1{
-        return false
+        // 首字母小写，这个时候只有全部小写才是true，其他为false
+
+        j := 1
+        f := true
+        // 全部小写
+        for ; j < length; j++ {
+            if word[j] >= 'a' && word[j] <= 'z' {
+                f = true
+            } else {
+                f = false
+                break
+            }
+        }
+
+        if f == false {
+            return false
+        }
+        return true
 	}
 	
     var flag bool = true
