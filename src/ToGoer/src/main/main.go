@@ -2,12 +2,15 @@ package main
 
 import (
 	"fmt"
-	"GoerRoad/src/ToGoer/src/basic" 
-	"GoerRoad/src/ToGoer/src/leetcode"
+	"ToGoer/src/basic" 
+	"ToGoer/src/leetcode"
 )
 
 func main() {
-	leetcode.DetectCapitalUse("mL");
+	basic.TestMultiArray()
+	basic.TestArray()
+	leetcode.ReverseOnlyLetters("ab-cd")
+	leetcode.DetectCapitalUse("jjj");
 	basic.TestAndNot()
 	fmt.Println("leetcode")
 	var array = []int {1,0,0,0,1,1}
