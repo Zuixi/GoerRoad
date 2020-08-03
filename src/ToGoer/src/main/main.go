@@ -2,11 +2,14 @@ package main
 
 import (
 	"fmt"
-	"ToGoer/src/basic" 
-	"ToGoer/src/leetcode"
+	"GoerRoad/src/ToGoer/src/basic" 
+	"GoerRoad/src/ToGoer/src/leetcode"
 )
 
 func main() {
+	candies := []int {1, 1, 2, 3}
+	leetcode.DistributeCandies(candies)
+	basic.TestMap()
 	basic.TestMultiArray()
 	basic.TestArray()
 	leetcode.ReverseOnlyLetters("ab-cd")
