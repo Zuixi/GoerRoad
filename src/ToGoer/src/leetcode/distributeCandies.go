@@ -7,8 +7,8 @@ func DistributeCandies(candies []int) int {
         cat[int(val)]++
     }
     var s = len(cat)
-    if len(candies) / 2 < s {
-        return len(candies) / 2
+    if len(candies) / 2 > s {
+        return s
     }
     return len(candies) / 2
 }

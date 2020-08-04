@@ -2,11 +2,15 @@ package main
 
 import (
 	"fmt"
-	"GoerRoad/src/ToGoer/src/basic" 
-	"GoerRoad/src/ToGoer/src/leetcode"
+	"ToGoer/src/basic" 
+    "ToGoer/src/leetcode"
 )
-
+// package path  
+// work vm is ToGoer/src/basic
+// local vm is GoerRoad/src/ToGoer/src/leetcode
 func main() {
+	 res :=  []string {"leetcode","et","code"}
+	leetcode.StringMatching(res)
 	candies := []int {1, 1, 2, 3}
 	leetcode.DistributeCandies(candies)
 	basic.TestMap()
@@ -25,11 +29,6 @@ func main() {
 
 	fmt.Println()
 	basic.TranferIntToString()
-
-	fmt.Println("Generate rand string as follows")
-	res := basic.GenerateRandString()
-	fmt.Println("return string is ", res)
-
 	basic.OperateString()
 
 	//create txt file and writesomething in it
