@@ -9,6 +9,10 @@ import (
 // work vm is ToGoer/src/basic
 // local vm is GoerRoad/src/ToGoer/src/leetcode
 func main() {
+	stones := []int {2, 7 , 4 , 1 , 8 , 1}
+	leetcode.LastStoneWeight(stones)
+	leetcode.RotatedDigits(678)
+	leetcode.IsAnagram("anagram", "nagaarm")
 	 res :=  []string {"leetcode","et","code"}
 	leetcode.StringMatching(res)
 	candies := []int {1, 1, 2, 3}
