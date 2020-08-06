@@ -9,6 +9,9 @@ import (
 // work vm is ToGoer/src/basic
 // local vm is GoerRoad/src/ToGoer/src/leetcode
 func main() {
+	dup := []int {1,0,2,3,0,4,5,0}
+	leetcode.DuplicateZeros(dup)
+	leetcode.GetNoZeroIntegers(1010)
 	stones := []int {2, 7 , 4 , 1 , 8 , 1}
 	leetcode.LastStoneWeight(stones)
 	leetcode.RotatedDigits(678)
