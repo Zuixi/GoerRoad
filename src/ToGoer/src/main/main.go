@@ -9,6 +9,7 @@ import (
 // work vm is ToGoer/src/basic
 // local vm is GoerRoad/src/ToGoer/src/leetcode
 func main() {
+	leetcode.MaxNumberOfBalloons("loonbalxballpoon")
 	dup := []int {1,0,2,3,0,4,5,0}
 	leetcode.DuplicateZeros(dup)
 	leetcode.GetNoZeroIntegers(1010)
