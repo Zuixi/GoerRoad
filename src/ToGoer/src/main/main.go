@@ -9,6 +9,11 @@ import (
 // work vm is ToGoer/src/basic
 // local vm is GoerRoad/src/ToGoer/src/leetcode
 func main() {
+	words := []string {"kuvp","q"}
+	order := "ngxlkthsjuoqcpavbfdermiywz"
+	leetcode.IsAlienSorted(words, order)
+	points := [][]int {{0,0}, {1,0}, {2,0}}
+	leetcode.NumberOfBoomerangs(points)
 	leetcode.MaxNumberOfBalloons("loonbalxballpoon")
 	dup := []int {1,0,2,3,0,4,5,0}
 	leetcode.DuplicateZeros(dup)
