@@ -2,13 +2,15 @@ package main
 
 import (
 	"fmt"
-	"ToGoer/src/basic" 
-    "ToGoer/src/leetcode"
+	"GoerRoad/src/ToGoer/src/basic" 
+	"GoerRoad/src/ToGoer/src/leetcode"
+	"GoerRoad/src/ToGoer/src/concurrency"
 )
 // package path  
 // work vm is ToGoer/src/basic
 // local vm is GoerRoad/src/ToGoer/src/leetcode
 func main() {
+	concurrency.Test()
 	words := []string {"kuvp","q"}
 	order := "ngxlkthsjuoqcpavbfdermiywz"
 	leetcode.IsAlienSorted(words, order)
