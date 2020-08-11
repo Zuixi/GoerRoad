@@ -10,7 +10,12 @@ import (
 // work vm is ToGoer/src/basic
 // local vm is GoerRoad/src/ToGoer/src/leetcode
 func main() {
-	concurrency.Test()
+	concurrency.SimpleTestPro()
+	concurrency.SimpleTest()
+	concurrency.TestJoinScopeProModify()
+	concurrency.TestJoinScopePro()
+	concurrency.TestJoinScope()
+	concurrency.CreateJoinKnot()
 	words := []string {"kuvp","q"}
 	order := "ngxlkthsjuoqcpavbfdermiywz"
 	leetcode.IsAlienSorted(words, order)
