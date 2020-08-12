@@ -9,7 +9,10 @@ import (
 // package path  
 // work vm is ToGoer/src/basic
 // local vm is GoerRoad/src/ToGoer/src/leetcode
+//  "program": "${workspaceFolder}\\GoerRoad\\src\\ToGoer\\src\\main" launch.json
 func main() {
+	concurrency.TestRWMutex()
+	concurrency.TestMutex()
 	basic.TestEnum()
 	basic.TestConstant()
 	concurrency.SimpleTestPro()
