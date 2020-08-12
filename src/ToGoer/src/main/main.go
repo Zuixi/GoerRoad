@@ -10,6 +10,8 @@ import (
 // work vm is ToGoer/src/basic
 // local vm is GoerRoad/src/ToGoer/src/leetcode
 func main() {
+	basic.TestEnum()
+	basic.TestConstant()
 	concurrency.SimpleTestPro()
 	concurrency.SimpleTest()
 	concurrency.TestJoinScopeProModify()
