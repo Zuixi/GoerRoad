@@ -11,6 +11,7 @@ import (
 // local vm is GoerRoad/src/ToGoer/src/leetcode
 //  "program": "${workspaceFolder}\\GoerRoad\\src\\ToGoer\\src\\main" launch.json
 func main() {
+	basic.TestStruct()
 	concurrency.TestRWMutex()
 	concurrency.TestMutex()
 	basic.TestEnum()
