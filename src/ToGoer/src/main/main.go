@@ -12,6 +12,7 @@ import (
 //  "program": "${workspaceFolder}\\GoerRoad\\src\\ToGoer\\src\\main" launch.json
 // ${workspaceRoot}/src
 func main() {
+	basic.TestStruct()
 	concurrency.TestRWMutex()
 	concurrency.TestMutex()
 	basic.TestEnum()
