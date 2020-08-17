@@ -35,4 +35,47 @@ func TestStruct() {
 	var num1 number
 	// 输出变量
 	fmt.Printf("%+v\n",num1)
+
+	// 规则二:
+	// 结构体的最大字段代表着整个结构体的填充
+	// 需要尽可能的使填充的字节最小
+	// 始终从高到低的顺序排列字段
+
+
+	// 在下面的这个例子中，整个结构体的大小都必须遵守8字节
+	// type xample struct {
+	// 	   counter int64
+	//     pi      float32
+	//     flag    bool
+	// }
+
+	// 声明和初始化number的字段的数值
+	// 每一行都必须以逗号结束
+	num2 := number {
+		age: 23,
+		flag: 3,
+		id:99,
+	}
+
+	// 输出num2字段的信息
+	fmt.Println("age is ", num2.age)
+	fmt.Println("flag is ", num2.flag)
+	fmt.Println("id is ", num2.id)
+
+	// 声明一个匿名类型的变量，并且使用结构体初始化
+	student := struct {
+		id int
+		age uint8
+		name string
+	}{
+		id:23,
+		age:21,
+		name:"www",
+	}
+	fmt.Println("id is ", student.id)
+	fmt.Println("age is ", student.age)
+	fmt.Println("name is ", student.name)
+
+	fmt.Println("Test over\n")
 }
+      
