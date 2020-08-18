@@ -2,7 +2,7 @@ package basic
 
 import (
 	"fmt"
-	"unicode/utf8"
+	_"unicode/utf8"
 )
 
 // 引用类型 ：slice, map, channel, function
