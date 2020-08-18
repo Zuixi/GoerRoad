@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// number 表示一个学生的信息，表示
+// number 表示一个数字的信息
 type number struct {
 	age  uint8
 	flag int16
