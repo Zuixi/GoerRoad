@@ -1,4 +1,4 @@
-package offercode
+package codinginterview
 
 // leetcode #1564
 func FindRepeatNumber(nums []int) int {
