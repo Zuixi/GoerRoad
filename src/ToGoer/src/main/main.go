@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"GoerRoad/src/ToGoer/src/basic" 
-	"GoerRoad/src/ToGoer/src/leetcode"
-	"GoerRoad/src/ToGoer/src/concurrency"
+	"ToGoer/src/basic" 
+	"ToGoer/src/leetcode"
+	"ToGoer/src/concurrency"
+	"ToGoer/src/codinginterview"
 )
 // package path  
 // work vm is ToGoer/src/basic
@@ -13,6 +14,14 @@ import (
 // ${workspaceRoot}/src
 // ${workspaceFolder}/ToGoer/src/main
 func main() {
+	concurrency.TestPoolWithCompare()
+	concurrency.TestPool()
+	concurrency.TestOnceWithTwoFunc()
+	concurrency.TestOnceWithChan()
+	concurrency.TestCond()
+	codinginterview.NumWays(3)
+	fmt.Println(codinginterview.RecurbFib(95))
+	codinginterview.Fib(95)
 	basic.TestSlice()
 	basic.TestStruct()
 	concurrency.TestRWMutex()
