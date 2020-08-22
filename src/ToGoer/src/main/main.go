@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"ToGoer/src/basic" 
-	"ToGoer/src/leetcode"
-	"ToGoer/src/concurrency"
+	"GoerRoad/src/ToGoer/src/basic" 
+	"GoerRoad/src/ToGoer/src/leetcode"
+	"GoerRoad/src/ToGoer/src/concurrency"
 )
 // package path  
 // work vm is ToGoer/src/basic
