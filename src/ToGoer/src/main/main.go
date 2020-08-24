@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"ToGoer/src/basic" 
-	"ToGoer/src/leetcode"
-	"ToGoer/src/concurrency"
-	"ToGoer/src/codinginterview"
+	"GoerRoad/src/ToGoer/src/basic" 
+	"GoerRoad/src/ToGoer/src/leetcode"
+	"GoerRoad/src/ToGoer/src/concurrency"
+	"GoerRoad/src/ToGoer/src/codinginterview"
 )
 // package path  
 // work vm is ToGoer/src/basic
@@ -14,6 +14,7 @@ import (
 // ${workspaceRoot}/src
 // ${workspaceFolder}/ToGoer/src/main
 func main() {
+	concurrency.TestSendData()
 	concurrency.TestPoolWithCompare()
 	concurrency.TestPool()
 	concurrency.TestOnceWithTwoFunc()
