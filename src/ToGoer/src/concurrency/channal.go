@@ -147,3 +147,23 @@ func ActivateMultiRoutine() {
 	close(begin)
 	wg.Wait()
 }
+
+// ------------------
+// 缓冲通道
+// ------------------
+
+// 缓冲通道的声明
+// var dataChan chan interface{}
+// dataChan = make(chan interface{}, 5)
+// 创建容量为4的缓冲通道, 意味着可以放置4个元素在chan上，不管是否被读取;
+// 在chan数量达到上限之前，写入操作都不会阻塞
+// 无缓冲channel也可以按缓冲channel定义，可以当做容量为0
+// a := make(chan int)
+// b := make(chan int, 0)
+
+// 阻塞的含义
+// 向一个已满的channel写入数据会出现阻塞
+// 从一个空的channel读取数据会出现阻塞
+// 满和空都是对于容量或者缓冲区大小而言的
+// 对于无缓冲channel而言，任何写入行为之后都是满的
+// 对于容量为4的缓冲channel而言，4次写入之后是满的，第五次会阻塞
