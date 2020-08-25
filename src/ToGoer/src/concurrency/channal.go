@@ -2,6 +2,7 @@ package concurrency
 
 import (
 	"fmt"
+	"sync"
 )
 
 // ------------
@@ -33,7 +34,7 @@ import (
 // receiveChan = dataChannel
 // sendChan = dataChannel
 
-// 需要注意的Channel是有类型的，例如string和int等类型
+// 需要注意的Channel是有类型的，例如string和int等类型 
 
 func TestSendData() {
 	// channel 只能传送string
@@ -48,13 +49,18 @@ func TestSendData() {
 	fmt.Println("string of channel is ", <-stringChannel)
 }
 
-
+// -----------------
+// channel的阻塞机制
+// -----------------
 // 仅简单的定义一个goroutine不能保证在main goroutine之前退出
 // channel是包含阻塞机制的，意味着试图写入已满的channel的任何goroutine都会等待channel被清空
 // 并且任何尝试从空chan读取的goroutine都将等待，直到有一个元素被放置
 // goroutine尝试在channel中写入数据，所以写入成功之前不会退出
 // 这两种case容易造成死锁
 
+//-------------
+// channel 死锁
+// ------------
 // stringChannel := make(chan string)
 // go func() {
 //	   if true {
@@ -65,3 +71,79 @@ func TestSendData() {
 // }()
 // 这里将永远等待，没有结果
 // fmt.Println(<-stringChannel)
+
+
+
+// ---------------------
+// <-的返回值可以有两个
+// ---------------------
+
+func TestResultOfChan() {
+	stringChan := make(chan string)
+
+	go func(){
+		stringChan<- "Hello, channel"
+	}()
+
+	// 这里可以看到stringChan的多个返回值
+	res, ok := <-stringChan
+	fmt.Printf("(%v): %v\n", ok, res)
+}
+
+// ------------------
+// close channel
+// ------------------
+
+func CloseChannel() {
+	stringChan := make(chan string)
+	close(stringChan)
+
+	res, ok := <-stringChan
+	// 虽然关闭了channel，但是还可以读取值
+	fmt.Printf("(%v): %v\n", ok, res)
+}
+
+// --------------------
+// range channel
+// --------------------
+
+func RangeChannel() {
+	intChan := make(chan int)
+
+	go func() {
+		// 在通道退出之前保证正常关闭
+		defer close(intChan)
+
+		for i := 1; i <= 5; i++ {
+			intChan<- i
+		}
+	}()
+
+	for integer := range intChan {
+		fmt.Printf("%v\t", integer)
+	}
+}
+
+// --------------------
+// 一次解除多个goroutine
+// --------------------
+
+func ActivateMultiRoutine() {
+	begin := make(chan interface{})
+	var wg sync.WaitGroup
+
+	for i := 0; i < 5; i++ {
+		wg.Add(1)
+		go func(i int) {
+			defer wg.Done()
+			// 这里对begin进行读取，但是由于begin中没有任何值，所以会一直阻塞
+			<-begin
+			fmt.Printf("%v has begun\n", i)
+		}(i)
+	}
+
+	fmt.Printf("Unblocking goroutines...\n")
+	// 关闭begin 解除多个goroutine的阻塞
+	close(begin)
+	wg.Wait()
+}
