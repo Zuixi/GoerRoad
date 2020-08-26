@@ -3,6 +3,8 @@ package concurrency
 import (
 	"fmt"
 	"sync"
+	"bytes"
+	"os"
 )
 
 // ------------
@@ -18,8 +20,8 @@ import (
 // channel也可以声明为单方向通道，仅仅只吃支持发送或者接受信息
 
 // 声明一个只读channel, 简单使用<-符号
-// var dataChannel chan intrerface{} 
-// ddataChannel = make(<-chan interface{})
+// var dataChannel chan interface{} 
+// dataChannel = make(<-chan interface{})
 
 
 // 声明一个只能被发送的channel， <-放在chan关键字的右侧就行
@@ -167,3 +169,107 @@ func ActivateMultiRoutine() {
 // 满和空都是对于容量或者缓冲区大小而言的
 // 对于无缓冲channel而言，任何写入行为之后都是满的
 // 对于容量为4的缓冲channel而言，4次写入之后是满的，第五次会阻塞
+
+// 缓冲channel在在某些情况下很有用，但是应该小心使用
+// 缓冲channel很容易成为不成熟的优化，让死锁变得更隐蔽
+// 下面的代码用于了解缓冲channel的工作方式
+
+func BuffChannel() {
+	var stdoutBuff bytes.Buffer
+	// 确保在进程退出之前将缓冲区内容输出到标准输出
+	defer stdoutBuff.WriteTo(os.Stdout)
+
+	intChan := make(chan int, 4)
+	go func() {
+		defer close(intChan)
+		defer fmt.Fprintln(&stdoutBuff, "Producer Done")
+		for i := 0; i < 5; i++ {
+			fmt.Fprintf(&stdoutBuff, "Sending: %d\n", i)
+			intChan <- i
+		}
+	}()
+
+	for integer := range intChan {
+		fmt.Fprintf(&stdoutBuff, "Received %v.\n", integer)
+	}
+}
+
+// --------------------
+// channel的默认值 nil
+// --------------------
+
+func DefaultChan() {
+	// 尝试从一个nil chan中读取值
+	// 会出现deadlock fatal error: all goroutines are asleep - deadlock
+	// 这是在main函数中执行才会，在goroutine中执行会阻塞
+	var intChan chan int
+	//fmt.Printf("default value in nil channel is %d \n", <-intChan)
+
+	// 这个goroutine会一直阻塞，因为没有值写入
+	go func() {
+		fmt.Printf("default value in nil channel is %d \n", <-intChan)
+	}()
+
+	// 对一个nil channel写入数据
+	// 同样会出现 deadlock fatal error: all goroutines are asleep - deadlock
+	//intChan <- 4
+
+	// 对一个nil channel关闭
+	// panic: close of nil channel
+	// 程序挂掉了
+	close(intChan)
+
+	// 通过对nil channel的测试，可以知道无论如何都需要确保chan在工作之前已经被初始化
+}
+
+// --------------------------------------
+// 如何组织不同类型的channel来构建稳健的程序
+// --------------------------------------
+
+// 首先要确保channel在正确的环境中，也就是分配channel所有权
+// 这里的所有权指的是goroutine的实例化、写入和关闭，明确哪个goroutine拥有该channel
+// 一个goroutine拥有一个channel时, 应该-->
+// 1. 初始化该channel
+// 2. 执行写入操作或将所有权交给另外的goroutine
+// 3. 关闭该channel
+// 4. 将上面三件事封装在一个列表中，并通过订阅channel将其公开
+
+// 将上面的责任分配给channel 所有者，会发生一些事情
+// 初始化channel的人，需要知道写入nil channel会带来死锁的危险
+// 初始化channel的人，需要了解关闭nil channel会带来panic的危险
+// 决定何时关闭channel的人，需要了解写入已经关闭channel会带来panic的危险
+// 决定何时关闭channel的人， 需要了解多次关闭channel会带来panic的危险
+// 在编译时期，需要使用类型检查器来防止对channel进行不正确的写入
+
+// 作为一个channel的消费者， 只需要关注几件事情-->
+// 1. channel什么时候会关闭
+// 2. 处理基于任何原因出现的阻塞
+// 想要知道channel什么时候关闭，检查chan第二个返回值就行了；
+// 对于第二点，没有统一的做法，但是作为消费者可以明确的是，读取操作可以并且必将产生阻塞
+
+// --------------------------------------------------------
+// 一个goroutine拥有一个channel和消费者, 处理阻塞问题
+// --------------------------------------------------------
+func DealBlockWithGoroutine() {
+	chanOwner := func() <-chan int {
+		resultChan := make(chan int, 5)
+
+		go func() {
+			// 确保在操作完成之后关闭channel, 这是所有者的职责
+			defer close(resultChan)
+
+			for i := 0; i <= 5; i++{
+				resultChan <- i
+			}
+		}()
+		// 这里resultChan将被隐式转换为只读channel
+		return resultChan
+	}
+
+	resultChan := chanOwner()
+	// 这里消费者消费channel， 只关心阻塞和关闭
+	for result := range resultChan {
+		fmt.Printf("Received: %d\n", result)
+	}
+	fmt.Printf("Done Receiving.\n")
+}

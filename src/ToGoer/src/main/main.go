@@ -14,6 +14,14 @@ import (
 // ${workspaceRoot}/src
 // ${workspaceFolder}/ToGoer/src/main
 func main() {
+	concurrency.ForSelect()
+	concurrency.DoOthers()
+	concurrency.TimeOutChan()
+	concurrency.ReadMultiChan()
+	concurrency.LockAndUnlockSelect()
+	concurrency.DealBlockWithGoroutine()
+	concurrency.DefaultChan()
+	concurrency.BuffChannel()
 	concurrency.ActivateMultiRoutine()
 	concurrency.RangeChannel()
 	concurrency.CloseChannel()
