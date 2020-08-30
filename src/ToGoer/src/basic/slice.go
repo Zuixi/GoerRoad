@@ -95,8 +95,8 @@ func TestSlice() {
 	lastCapacity := cap(name)
 	fmt.Printf("last cap of name is [%d]\n", lastCapacity)
 
-	// 往name中添加2000个元素
-	for index := 1; index <= 2000; index++ {
+	// 往name中添加10000个元素
+	for index := 1; index <= 10000; index++ {
 		name = append(name, fmt.Sprintf("Name: %d", index))
 
 		// 每次使用append方法时候，都会检查slice的容量和长度
@@ -207,13 +207,13 @@ func TestSlice() {
 	var buf [utf8.UTFMax]byte
 
 	for i, r := range str {
-		r1 := utf8.RuneLen(r)
+		rl := utf8.RuneLen(r)
 
-		si := i + r1
+		si := i + rl
 
 		copy(buf[:], str[i:si])
 
-		fmt.Printf("%2d: %q; codepoint:  %#6x; encoded bytes: %#v\n", i, r, r, buf[:r1])
+		fmt.Printf("%2d: %q; codepoint:  %#6x; encoded bytes: %#v\n", i, r, r, buf[:rl])
 	}
 
 } 
